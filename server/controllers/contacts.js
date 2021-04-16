@@ -3,7 +3,7 @@ import Contact from '../models/contactSchema.js';
 import algoliasearch from 'algoliasearch';
 
 
-const client = algoliasearch('FIM60MKDNL', 'ff22308b9c74a2d8b8b9ad60ed4365f7');
+const client = algoliasearch('xxxx', 'xxxx');
 const index = client.initIndex('XD');
 export const getContacts = async (req, res) => {
     try {
