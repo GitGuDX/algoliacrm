@@ -1,9 +1,13 @@
 import mongoose from 'mongoose';
+import algoliasearch from 'algoliasearch';
+
+const client = algoliasearch('FIM60MKDNL', '62002d4f3a380e257335f8e130078701');
+const index = client.initIndex('XD');
 
 
 
 
-// Pass `{algoliaIndex: true}` to push theses attributes for indexing to Algolia
+
 
 const contactSchema = mongoose.Schema({
     email:  String,
@@ -15,5 +19,10 @@ const contactSchema = mongoose.Schema({
 
 
 const contactContent = mongoose.model('contactContent', contactSchema);
+
+
+
+
+
 
 export default contactContent;

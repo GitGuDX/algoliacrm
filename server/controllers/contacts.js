@@ -3,15 +3,16 @@ import Contact from '../models/contactSchema.js';
 import algoliasearch from 'algoliasearch';
 
 
-const client = algoliasearch('xxxx', 'xxxx');
+const client = algoliasearch('FIM60MKDNL', '62002d4f3a380e257335f8e130078701');
 const index = client.initIndex('XD');
 export const getContacts = async (req, res) => {
     try {
-        const contactContents = await  contactContent.find();
-
-        res.status(200).json(contactContents);
+        const contactContents = await  contactContent.find().lean().exec();
+        index.saveObjects(contactContents);
+        res.status(200).json(contactContents.toJSON());
+       
     } catch (error) {
-        res.status(404).json({ message: error.nessage})
+        res.status(404).json({ message: error.message})
     }
 }
 
@@ -22,8 +23,9 @@ export const createContact = async (req, res) => {
 
     try {
         await newContact.save();
-        index.saveObjects(JSON.stringify(newContact));
-        res.status(201).json(newContact);
+        index.saveObjects(newContact);
+
+        res.status(201).json(newContact.toJSON());
         
     } catch (error) {
         res.status(409).json({ message: error.message });
